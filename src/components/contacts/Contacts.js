@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useContactsStore } from "../../stores/Api";
 import { Link } from "react-router-dom";
+import DeleteContacts from "./DeleteContacts";
 function Show() {
   const contacts = useContactsStore();
 
   useEffect(() => {
-    contacts.getApi();
+    if (contacts.contacts == 0) {
+      contacts.getApi();
+    }
   }, []);
 
   return (
@@ -25,12 +28,12 @@ function Show() {
               <p className="font-bold">{contact.name}</p>
               <p className="mb-2">{contact.number}</p>
             </div>
-            <Link
-              className="w-10/12 text-sm underline"
-              to={`/edit/${contact.id}`}
-            >
-              Edit
-            </Link>
+            <div className="w-10/12 flex items-center gap-2">
+              <Link className="text-sm underline" to={`/edit/${contact.id}`}>
+                Edit
+              </Link>
+              <DeleteContacts />
+            </div>
           </div>
           <hr />
         </div>

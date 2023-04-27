@@ -40,7 +40,7 @@ export const useContactsStore = create(
       },
       editContact: async (payload) => {
         const apiResponse = await axios.put(
-          "http://localhost:3005/contatcs",
+          `http://localhost:3005/contatcs/${payload.id}`,
           payload
         );
         set((state) => {
@@ -49,15 +49,23 @@ export const useContactsStore = create(
           state.contacts = contactsState;
         });
       },
+      deleteContact: async (id) => {
+        const apiResponse = await axios.delete(
+          `http://localhost:3005/contatcs/${id}`
+        );
+        set((state) => {
+          state.contacts = state.contacts.filter((_) => _.id !== id);
+        });
+      },
     }))
   )
 );
 
 export const getContactById = (id) => {
   return (state) => {
-    let contact = state.contacts.filter((c) => c.id === Number(id));
-    if (contact) {
-      return contact[0];
+    let cont = state.contacts.filter((c) => c.id === Number(id));
+    if (cont) {
+      return cont[0];
     }
     return null;
   };

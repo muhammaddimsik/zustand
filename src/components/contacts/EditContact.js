@@ -1,26 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getContactById, useContactsStore } from "../../stores/Api";
 
 function EditContact() {
-  const name = useRef("");
-  const number = useRef("");
   const { id } = useParams();
   const contactToEdit = useContactsStore(getContactById(id));
   const editContact = useContactsStore((state) => state.EditContact);
+  const callApi = useContactsStore((state) => state.getApi);
   const navigate = useNavigate();
+  const [contacts, setContacts] = useState({
+    name: "",
+    number: "",
+  });
 
   useEffect(() => {
-    if (contactToEdit) {
-      name.target.value = contactToEdit.name;
-      number.target.value = contactToEdit.number;
-    }
+    callApi();
   }, []);
 
   const updateHandle = async () => {
     let payload = {
-      name: name.target.value,
-      number: number.target.value,
+      name: contacts.name,
+      number: contacts.number,
       id: Number(id),
     };
     await editContact(payload);
@@ -38,7 +38,8 @@ function EditContact() {
             id="name"
             type="text"
             required
-            ref={name}
+            value={contacts.name}
+            onChange={(e) => setContacts({ ...contacts, name: e.target.value })}
           />
         </div>
         <div className="mb-2">
@@ -48,7 +49,10 @@ function EditContact() {
             id="number"
             type="text"
             required
-            ref={number}
+            value={contacts.number}
+            onChange={(e) =>
+              setContacts({ ...contacts, number: e.target.value })
+            }
           />
         </div>
         <button
