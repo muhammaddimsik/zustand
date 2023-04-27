@@ -7,13 +7,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import EditContact from "./components/contacts/EditContact";
 import "./index.css";
 import Todos from "./components/todos/Todos";
+import Coba from "./components/Coba";
 
 function App() {
   return (
     <div className="container mx-auto mt-5">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Todos />} />
+          <Route path="/" element={<Coba />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,11 +1,6 @@
 {
   "contatcs": [
     {
-      "id": 1,
-      "name": "John Doe",
-      "number": "085240943430"
-    },
-    {
       "id": 2,
       "name": "Olivier Jensen",
       "number": "085643248721"
@@ -14,17 +9,6 @@
       "id": 3,
       "name": "Robert Alegri",
       "number": "081823210810"
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "name": "none",
-      "number": "none",
-      "id": 6
     },
     {
       "name": "Andi",
